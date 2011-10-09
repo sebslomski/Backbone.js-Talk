@@ -1,0 +1,151 @@
+Ideas:
+  Current Status
+    - Management: Hey, we need to add some fance animations to our website
+      Developers: Let's just add a view jQuery on click handlers
+
+    - 2 months later
+      => Management: These animations rock! let's add some more!
+         Developers: Okaaay, shortest stick looses
+
+    - 6 months later
+      => Management: Why does this talk so long???
+         Developer: WTF?! Who did this? (Toilet penis kill me now)
+
+
+    - Your Problem is not unique -> cubicles (office space)
+
+
+  What You actually need:
+    - deal with remote resources
+    - organize rendering of views
+    - navigation
+    - no more jquery callback soup
+
+  But there's Backbone.js...
+
+
+  In a Nutshell:
+    Backbone.js abstracts functionality, separates concerns and decouples frontend code
+
+  How?
+    provides MVC
+    event driven
+    easy to use with rest apis
+    very small
+    hard dependency -> underscore, jquery/zepto
+
+  Wer hats erfunden? (Ricola)
+    again ashkenas ...
+    (documentcloud // show logos of all libs by them)
+
+
+
+//  classic web app model:
+//    Server (MVC) -> HTML -> Client
+//    Problems:
+//      server is doing more than it should
+//      one server, different UIs
+//      What it should look like:
+//        server:
+//          receive request
+//          validate data
+//          manage db
+//          sending back pure json data
+//
+//        client:
+//          send request
+//          load templates
+//          load data
+//          process business logic
+//          validate data
+//
+//  show logos of different js-heavy apps:
+//    facebook, gmail, google docs, twitter
+
+
+
+
+Info:
+  framework to organize js apps
+  provides MVC
+  event driven
+  by documentcloud
+  easy to use with rest apis
+  very small
+  hard dependency -> underscore, jquery/zepto
+
+
+Models:
+  keep your data in sync with the server
+  define custom events ([add, remove | (to a collection)], change, destroy, error(validation))
+  fetch/save/destroy/validations
+
+  code:
+    new model
+    set data
+    save model to the server
+
+    events: model.bind('change', alert)
+
+
+Collections:
+  organize models, list of models
+  REST calls like model
+  events:
+    add/remove
+    refresh
+    reset
+
+  features:
+    fetch (array from server)
+    auto sort
+
+  code:
+    new collection
+    fetch() -> show the json (i.e. "[{}, {}]")
+
+
+
+Views:
+  responsible for DOM modifications
+  works in el range
+  related to collection or model
+  events bound to view
+
+  code:
+    show basic view (at first without template)
+    new view
+    view.render()
+    $('foo').html(view.el)
+
+  explain: keeps in sync
+    show graphic of view and model
+    click in view range -> event changes the model
+    => changes the model -> event changes the view
+
+
+Templates
+  basic example
+
+Routers:
+  url routing control
+  works with pushState
+
+Best practices:
+  $(el).height -> 0 until it is attached to the DOM
+
+  always do view.render() before $('foo').html(view.el)
+  Better: return el in render function
+
+  routers should only route, no dom manipulation
+
+  works excellent with coffeescript
+
+
+
+Unused stuff:
+  explain templates on github
+  // "Abstraction is the only way we can deal with complexity" by Djikstra
+
+
+

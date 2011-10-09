@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>CSSS: A brief introduction</title>
+
+  <link href="csss/slideshow.css" rel="stylesheet" />
+  <link href="css/theme.css" rel="stylesheet" />
+  <link href="css/talk.css" rel="stylesheet" />
+</head>
+<body data-duration="20">
+
+<header id="intro" class="slide">
+  <h1>
+    Structuring front-ends with
+    <strong>Backbone.js</strong>
+  </h1>
+  <p class="attribution">
+    By <a href="http://sebslomski.com">Sebastian Slomski</a>
+    (<a href="http://twitter.com/sebslomski">@sebslomski</a>)
+  </p>
+</header>
+
+<section class="slide" id="current-status-month-1">
+  <h3>Current Status</h3>
+  Management: Hey, we need to add some fance animations to our website
+  Developers: Let's just add a view jQuery on click handlers
+</section>
+
+<section class="slide" id="current-status-month-2">
+  <hgroup>
+    <h3>Current Status</h3>
+    <h4>2 months later</h4>
+  </hgroup>
+  Management: These animations rock! let's add some more!
+  Developers: Okaaay, shortest stick looses
+</section>
+
+<section class="slide" id="current-status-month-6">
+  <hgroup>
+    <h3>Current Status</h3>
+    <h4>6 months later</h4>
+  </hgroup>
+  Management: Why does this talk so long???
+  Developer: WTF?! Who did this? (Toilet penis kill me now)
+</section>
+
+<section class="slide" id="not-unique">
+  <hgroup>
+    <h3>But:</h3>
+    <h4>Your Problem is not unique</h4>
+  </hgroup>
+  cubicles (office space)
+</section>
+
+<section class="slide" id="what-you-need">
+  <h3>What You actually need</h3>
+  <ul>
+    <li class="delayed">Deal with remote resources</li>
+    <li class="delayed">Navigation</li>
+    <li class="delayed">Organize rendering of views</li>
+    <li class="delayed">And please, no more jQuery callback soup</li>
+  </ul>
+</section>
+
+<section class="slide" id="backbone-to-the-rescue">
+  <hgroup>
+    <h3>Backbone.js
+    <h4>to the rescue!</h4>
+  </hgroup>
+</section>
+
+<section class="slide" id="nutshell">
+  <hgroup>
+    <h3>Backbone.js
+    <h4>In a Nutshell</h4>
+  </hgroup>
+  <quote>
+    Backbone.js abstracts functionality,
+    separates concerns and decouples frontend code
+  </quote>
+</section>
+
+<section class="slide" id="backbone">
+  <h3>Backbone.js</h3>
+  <ul>
+    <li class="delayed">Provides MVC</li>
+    <li class="delayed">Easy to use with rest APIs</li>
+    <li class="delayed">Event driven</li>
+    <li class="delayed">Very small (4.6kb, Packed and Gzipped)</li>
+    <li class="delayed">Hard dependencies: underscore, jquery/zepto</li>
+  </ul>
+</section>
+
+<section class="slide" id="ricola">
+  <h3>Und wer hats erfunden?</h3>
+    again ashkenas ...
+    documentcloud
+    // show logos of all libs by them
+</section>
+
+<section class="slide" id="mvc">
+  <div class="wrapper">
+    <div class="circle delayed">
+      M
+      <small>Model</small>
+    </div>
+
+    <div class="circle delayed">
+      C
+      <small>Collection</small>
+    </div>
+
+    <div class="circle delayed">
+      V
+      <small>View</small>
+    </div>
+
+    <div class="circle delayed">
+      R
+      <small>Router</small>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="slide" id="models-info">
+  <hgroup>
+    <h3>Models</h3>
+    <h4>Overview</h4>
+  </hgroup>
+  <ul>
+    <li class="delayed">Keep your data in sync with the server</li>
+    <li class="delayed">Define custom events: change, destroy, error(validation)</li>
+  </ul>
+
+  <h5 class="delayed">Features</h5>
+  <ul>
+    <li class="delayed">Fetch model from server</li>
+    <li class="delayed">Save model to the server</li>
+    <li class="delayed">Destroy model on the server</li>
+    <li class="delayed">Validate model</li>
+  </ul>
+</section>
+
+<section class="slide" id="models-definition">
+  <hgroup>
+    <h3>Models</h3>
+    <h4>Defining a model</h4>
+  </hgroup>
+  <pre><code lang="javascript">TweetModel = Backbone.Model.extends({
+  url: '/tweet',
+  defaults: {
+    date: +new Date()
+  }
+});
+</code></pre>
+</section>
+
+<section class="slide" id="models-usage">
+  <hgroup>
+    <h3>Models</h3>
+    <h4>Creating a new model</h4>
+  </hgroup>
+  <pre><code lang="javascript">// Create new instance
+tweet = new TweetModel();
+
+// Set the model's attributes
+tweet.set({
+  text: 'current status: teaching backbone.js',
+  user: 'sebslomski'
+});
+
+// Save the model to the server
+tweet.save();
+</code></pre>
+</section>
+
+<section class="slide" id="models-fetch">
+  <hgroup>
+    <h3>Models</h3>
+    <h4>Load a model from the server</h4>
+  </hgroup>
+  <pre><code lang="javascript">// Create a new instance and initalize it with an ID
+tweet = new TweetModel({id: 1});
+
+// Load the model's attributes from the server
+tweet.fetch();
+</code></pre>
+</section>
+
+<section class="slide" id="models-destroy">
+  <hgroup>
+    <h3>Models</h3>
+    <h4>Deleting a model on the server</h4>
+  </hgroup>
+  <pre><code lang="javascript">tweet.destroy();</code></pre>
+</section>
+
+
+<section class="slide" id="collections-info">
+  <hgroup>
+    <h3>Collections</h3>
+    <h4>Overview</h4>
+  </hgroup>
+  <ul>
+    <li class="delayed">List of models</li>
+    <li class="delayed">Helps you to organize your models</li>
+    <li class="delayed">Custom events: add and remove</li>
+  </ul>
+
+  <h2 class="delayed">Features</h2>
+  <ul>
+    <li class="delayed">Fetch models from server</li>
+    <li class="delayed">Sorting</li>
+  </ul>
+</section>
+
+<section class="slide" id="collections-definition">
+  <hgroup>
+    <h3>Collections</h3>
+    <h4>Defining a collection</h4>
+  </hgroup>
+  <pre><code lang="javascript">TweetCollection = Backbone.Collection.extends({
+  model: TweetModel,
+  url: '/tweets'
+});
+</code></pre>
+</section>
+
+<section class="slide" id="collections-add">
+  <hgroup>
+    <h3>Collections</h3>
+    <h4>Using a collection</h4>
+  </hgroup>
+  <pre><code lang="javascript">// Create a new instance
+tweets = new TweetCollection();
+
+// Loads an array of models from the server
+tweets.fetch();
+
+// Add a model to the collection
+tweets.add(tweet);
+
+// Remove a model from the collection
+tweets.remove(tweet);</code></pre>
+
+</section>
+
+
+<section class="slide" id="views-info">
+  <hgroup>
+    <h3>Views</h3>
+    <h4>Overview</h4>
+  </hgroup>
+  <ul>
+    <li class="delayed">Responsible for DOM modifications</li>
+    <li class="delayed">Related to a DOM element and a collection or a model</li>
+    <li class="delayed">Works in its DOM element range</li>
+    <li class="delayed">Events bound to view</li>
+</ul>
+</section>
+
+<section class="slide" id="views-definition">
+  <hgroup>
+    <h3>Views</h3>
+    <h4>Defining a view</h4>
+  </hgroup>
+  <pre><code lang="javascript">AddTweetView = Backbone.Views.extends({
+  id: 'add-tweet',
+  events: {
+    'button.save click': 'saveTweet'
+  },
+
+  render: function() {
+    $(this.el).html(
+      "<input type="text" name="text">" +
+      "<input type="button" class="save" value="save">"
+    );
+  },
+
+  saveTweet: function(event) {
+    tweet = new TweetModel({
+      text: $(this.el).find('text').val()
+    });
+    tweet.save()
+  }
+});
+  </code></pre>
+</section>
+
+<section class="slide" id="views-usage">
+  <hgroup>
+    <h3>Views</h3>
+    <h4>Using a view</h4>
+  </hgroup>
+  <pre><code lang="javascript">// Creates a new instance of the view
+view = new AddTweetView();
+
+// Render the view
+view.render();
+
+// Append the content of the view to the DOM
+$('.some-div').html(view.el);
+  </code></pre>
+</section>
+
+
+<section class="slide" id="view-sync">
+  <hgroup>
+    <h3>Views</h3>
+    <h4>Keepng everything in sync</h4>
+  </hgroup>
+  Show how the events work (model -> view)
+</section>
+
+
+<section class="slide" id="routers-info">
+  <hgroup>
+    <h3>Routers</h3>
+    <h4>Overview</h4>
+  </hgroup>
+  <ul>
+    <li class="delayed">Keeps track of URL routing</li>
+    <li class="delayed">Works with pushState</li>
+  </ul>
+</section>
+
+<section class="slide" id="routers-definition">
+  <hgroup>
+    <h3>Routers</h3>
+    <h4>Defining a router</h4>
+  </hgroup>
+  <pre><code lang="javascript">MainRouter = Backbone.Router.extends({
+  routes: {
+    '': 'showAllTweets',
+    '/tweets': 'showAllTweets',
+    'tweet/:id': 'showTweet'
+  },
+
+  showAllTweets: function() {
+    ...
+  },
+
+  showTweet: function(id) {
+    ...
+  }
+});
+
+mainRouter = new MainRouter();
+</code></pre>
+  TODO: Picture of URL
+</section>
+
+
+<section class="slide" id="best-practices">
+
+</section>
+
+
+
+<section class="slide" id="sebslomski">
+  <h2>Thank you!</h2>
+<pre>
+     <a href="http://sebslomski.com">sebslomski<span class="delayed">.com</span></a>
+<a href="http://twitter.com/sebslomski"><span class="delayed">@</span>sebslomski</a>
+  <a href="http://gmail.com"><span class="delayed">me@</span>sebslomski<span class="delayed">.com</span></a>
+</pre>
+  <p id="for-hire" class="delayed">
+    I'm<br>available<br>for hire!
+  </p>
+</section>
+
+<script src="csss/slideshow.js"></script>
+<script src="csss/plugins/css-prefix.js"></script>
+<script src="csss/plugins/css-edit.js"></script>
+<script src="csss/plugins/css-snippets.js"></script>
+<script src="csss/plugins/css-controls.js"></script>
+<script>
+var slideshow = new SlideShow();
+
+var snippets = document.querySelectorAll('.snippet');
+for(var i=0; i<snippets.length; i++) {
+  new CSSSnippet(snippets[i]);
+}
+
+var cssControls = document.querySelectorAll('.css-control');
+for(var i=0; i<cssControls.length; i++) {
+  new CSSControl(cssControls[i]);
+}
+</script>
+
+</body>
+</html>
