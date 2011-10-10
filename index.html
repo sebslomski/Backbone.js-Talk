@@ -8,6 +8,7 @@
   <link href="csss/slideshow.css" rel="stylesheet" />
   <link href="css/theme.css" rel="stylesheet" />
   <link href="css/talk.css" rel="stylesheet" />
+  <link href="css/sh_golden.min.css" rel="stylesheet" />
 </head>
 <body data-duration="20">
 
@@ -77,8 +78,9 @@
     <h4>In a Nutshell</h4>
   </hgroup>
   <quote>
-    Backbone.js abstracts functionality,
-    separates concerns and decouples frontend code
+    <span class="delayed">Backbone.js abstracts functionality,</span>
+    <span class="delayed">separates concerns</span>
+    <span class="delayed">and decouples frontend code.</span>
   </quote>
 </section>
 
@@ -94,32 +96,34 @@
 </section>
 
 <section class="slide" id="ricola">
-  <h3>Und wer hats erfunden?</h3>
-    again ashkenas ...
-    documentcloud
-    // show logos of all libs by them
+  <hgroup>
+    <h3>Who made it?</h3>
+    <h4 class="delayed">Documentcloud</h4>
+  </hgroup>
+  <ul>
+  <li class="delayed">CoffeeScript</li>
+  <li class="delayed">Underscore.js</li>
+  <li class="delayed">Jammit</li>
+  <li class="delayed">Visual Search</li>
+  </ul>
 </section>
 
 <section class="slide" id="mvc">
   <div class="wrapper">
     <div class="circle delayed">
       M
-      <small>Model</small>
     </div>
 
     <div class="circle delayed">
       C
-      <small>Collection</small>
     </div>
 
     <div class="circle delayed">
       V
-      <small>View</small>
     </div>
 
     <div class="circle delayed">
       R
-      <small>Router</small>
     </div>
   </div>
 </section>
@@ -150,13 +154,13 @@
     <h3>Models</h3>
     <h4>Defining a model</h4>
   </hgroup>
-  <pre><code lang="javascript">TweetModel = Backbone.Model.extends({
+  <pre class="sh_javascript_dom delayed">TweetModel = Backbone.Model.extends({
   url: '/tweet',
   defaults: {
     date: +new Date()
   }
 });
-</code></pre>
+</pre>
 </section>
 
 <section class="slide" id="models-usage">
@@ -164,18 +168,18 @@
     <h3>Models</h3>
     <h4>Creating a new model</h4>
   </hgroup>
-  <pre><code lang="javascript">// Create new instance
+  <pre class="sh_javascript_dom delayed">// Create new instance
 tweet = new TweetModel();
-
+<span class="delayed">
 // Set the model's attributes
 tweet.set({
   text: 'current status: teaching backbone.js',
   user: 'sebslomski'
 });
-
+</span><span class="delayed">
 // Save the model to the server
 tweet.save();
-</code></pre>
+</span></pre>
 </section>
 
 <section class="slide" id="models-fetch">
@@ -183,12 +187,11 @@ tweet.save();
     <h3>Models</h3>
     <h4>Load a model from the server</h4>
   </hgroup>
-  <pre><code lang="javascript">// Create a new instance and initalize it with an ID
+  <pre class="sh_javascript_dom delayed">// Create a new instance and initalize it with an ID
 tweet = new TweetModel({id: 1});
-
+<span class="delayed">
 // Load the model's attributes from the server
-tweet.fetch();
-</code></pre>
+tweet.fetch();</span></pre>
 </section>
 
 <section class="slide" id="models-destroy">
@@ -196,7 +199,7 @@ tweet.fetch();
     <h3>Models</h3>
     <h4>Deleting a model on the server</h4>
   </hgroup>
-  <pre><code lang="javascript">tweet.destroy();</code></pre>
+  <pre class="sh_javascript_dom">tweet.destroy();</pre>
 </section>
 
 
@@ -223,11 +226,11 @@ tweet.fetch();
     <h3>Collections</h3>
     <h4>Defining a collection</h4>
   </hgroup>
-  <pre><code lang="javascript">TweetCollection = Backbone.Collection.extends({
+  <pre class="sh_javascript_dom delayed">TweetCollection = Backbone.Collection.extends({
   model: TweetModel,
   url: '/tweets'
 });
-</code></pre>
+</pre>
 </section>
 
 <section class="slide" id="collections-add">
@@ -235,17 +238,17 @@ tweet.fetch();
     <h3>Collections</h3>
     <h4>Using a collection</h4>
   </hgroup>
-  <pre><code lang="javascript">// Create a new instance
+  <pre class="sh_javascript_dom delayed">// Create a new instance
 tweets = new TweetCollection();
-
+<span class="delayed">
 // Loads an array of models from the server
 tweets.fetch();
-
+</span><span class="delayed">
 // Add a model to the collection
 tweets.add(tweet);
-
+</span><span class="delayed">
 // Remove a model from the collection
-tweets.remove(tweet);</code></pre>
+tweets.remove(tweet);</span></pre>
 
 </section>
 
@@ -268,7 +271,40 @@ tweets.remove(tweet);</code></pre>
     <h3>Views</h3>
     <h4>Defining a view</h4>
   </hgroup>
-  <pre><code lang="javascript">AddTweetView = Backbone.Views.extends({
+  <pre class="sh_javascript_dom">AddTweetView = Backbone.Views.extends({
+  id: 'add-tweet',
+
+  render: function() {
+    $(this.el).html(
+      "&lt;input type="text" name="text"&gt;" +
+      "&lt;input type="button" class="save" value="save"&gt;"
+    );
+  }
+});</pre>
+</section>
+
+
+<section class="slide" id="views-usage">
+  <hgroup>
+    <h3>Views</h3>
+    <h4>Using a view</h4>
+  </hgroup>
+  <pre class="sh_javascript_dom">// Creates a new instance of the view
+view = new AddTweetView();
+<span class="delayed">
+// Render the view
+view.render();
+</span><span class="delayed">
+// Append the content of the view to the DOM
+$('.some-div').html(view.el);</span></pre>
+</section>
+
+<section class="slide" id="views-events">
+  <hgroup>
+    <h3>Views</h3>
+    <h4>Adding events</h4>
+  </hgroup>
+  <pre class="sh_javascript_dom">AddTweetView = Backbone.Views.extends({
   id: 'add-tweet',
   events: {
     'button.save click': 'saveTweet'
@@ -276,8 +312,8 @@ tweets.remove(tweet);</code></pre>
 
   render: function() {
     $(this.el).html(
-      "<input type="text" name="text">" +
-      "<input type="button" class="save" value="save">"
+      "&lt;input type="text" name="text"&gt;" +
+      "&lt;input type="button" class="save" value="save"&gt;"
     );
   },
 
@@ -285,35 +321,24 @@ tweets.remove(tweet);</code></pre>
     tweet = new TweetModel({
       text: $(this.el).find('text').val()
     });
-    tweet.save()
+    tweet.save();
   }
-});
-  </code></pre>
-</section>
-
-<section class="slide" id="views-usage">
-  <hgroup>
-    <h3>Views</h3>
-    <h4>Using a view</h4>
-  </hgroup>
-  <pre><code lang="javascript">// Creates a new instance of the view
-view = new AddTweetView();
-
-// Render the view
-view.render();
-
-// Append the content of the view to the DOM
-$('.some-div').html(view.el);
-  </code></pre>
+});</pre>
 </section>
 
 
 <section class="slide" id="view-sync">
   <hgroup>
     <h3>Views</h3>
-    <h4>Keepng everything in sync</h4>
+    <h4>Keeping everything in sync</h4>
   </hgroup>
-  Show how the events work (model -> view)
+  <div class="wrapper">
+    <div class="circle view">View</div>
+    <div class="interaction">
+      <div></div>
+    </div>
+    <div class="circle model">Model</div>
+  </div>
 </section>
 
 
@@ -333,7 +358,7 @@ $('.some-div').html(view.el);
     <h3>Routers</h3>
     <h4>Defining a router</h4>
   </hgroup>
-  <pre><code lang="javascript">MainRouter = Backbone.Router.extends({
+  <pre class="sh_javascript_dom">MainRouter = Backbone.Router.extends({
   routes: {
     '': 'showAllTweets',
     '/tweets': 'showAllTweets',
@@ -348,15 +373,9 @@ $('.some-div').html(view.el);
     ...
   }
 });
-
-mainRouter = new MainRouter();
-</code></pre>
+<span class="delayed">
+mainRouter = new MainRouter();</span></pre>
   TODO: Picture of URL
-</section>
-
-
-<section class="slide" id="best-practices">
-
 </section>
 
 
@@ -378,13 +397,12 @@ mainRouter = new MainRouter();
 <script src="csss/plugins/css-edit.js"></script>
 <script src="csss/plugins/css-snippets.js"></script>
 <script src="csss/plugins/css-controls.js"></script>
+<script type="text/javascript" src="js/sh_main.min.js"></script>
+<script type="text/javascript" src="js/sh_javascript_dom.min.js"></script>
 <script>
 var slideshow = new SlideShow();
 
-var snippets = document.querySelectorAll('.snippet');
-for(var i=0; i<snippets.length; i++) {
-  new CSSSnippet(snippets[i]);
-}
+sh_highlightDocument();
 
 var cssControls = document.querySelectorAll('.css-control');
 for(var i=0; i<cssControls.length; i++) {

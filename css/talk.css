@@ -1,3 +1,20 @@
+pre.sh_javascript_dom {
+  padding: 1em;
+}
+
+pre.sh_javascript_dom.displayed,
+pre.sh_javascript_dom .displayed {
+  opacity: 1;
+}
+
+quote {
+  font-style: italic;
+  width: 65%;
+  margin: 0 auto;
+  display: block;
+}
+
+
 #timer::before {
   content: 'time'
 }
@@ -33,33 +50,34 @@ header.slide#intro {
   }
 
 
-section.slide#mvc {
-
+div.wrapper {
+  font-size: 400%;
+  width: 7.5em;
+  margin: 0 auto;
 }
 
-  section.slide#mvc div.circle {
-    background: red;
-    border-radius: 999px;
-    float: left;
-    margin: 20px;
-    text-align: center;
-    font-size: 400%;
-    box-shadow: .02em .02em .1em black;
-    width: 1.6em;
+div.circle {
+  background: red;
+  border-radius: 999px;
+  float: left;
+  margin: 0.1em;
+  text-align: center;
+  box-shadow: .02em .02em .1em black;
+  width: 1.6em;
+}
+
+  div.circle.r.displayed {
+    opacity: 1;
   }
 
-    section.slide#mvc div.circle.r.displayed {
-      opacity: 1;
-    }
+  div.circle.r.displayed span.controller,
+  div.circle.r span.router {
+    display: none;
+  }
 
-    section.slide#mvc div.circle.r.displayed span.controller,
-    section.slide#mvc div.circle.r span.router {
-      display: none;
-    }
-
-    section.slide#mvc div.circle.r.displayed span.router {
-      display: inline;
-    }
+  div.circle.r.displayed span.router {
+    display: inline;
+  }
 
 .question {
   color: orange;

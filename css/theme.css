@@ -156,7 +156,7 @@ strong, b {
 	}
 
 .slide {
-	background: url(img/spotlight.svg), #333 url(img/hole.png);
+  background: #333;
 	background-size: auto, 20px;
 	text-shadow:.05em .05em .1em rgba(0,0,0,.4);
 	color: white;
