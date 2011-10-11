@@ -25,34 +25,31 @@
 
 <section class="slide" id="current-status-month-1">
   <h3>Current Status</h3>
-  Management: Hey, we need to add some fance animations to our website
-  Developers: Let's just add a view jQuery on click handlers
+  <strong class="delayed">Management:</strong> <span class="delayed">&raquo;We need to make our website more interactive.&laquo;</span>
+  <br>
+  <strong class="delayed">Developers:</strong> <span class="delayed">&raquo;Sure, we'll add a view jQuery event handlers.&laquo;</span>
 </section>
 
 <section class="slide" id="current-status-month-2">
   <hgroup>
     <h3>Current Status</h3>
-    <h4>2 months later</h4>
+    <h4>A view months later</h4>
   </hgroup>
-  Management: These animations rock! let's add some more!
-  Developers: Okaaay, shortest stick looses
+  <strong class="delayed">Management:</strong> <span class="delayed">&raquo;These user interactions rock! MOAR!&laquo;</span>
+  <br>
+  <strong class="delayed">Developers:</strong> <span class="delayed">&raquo;Okay.&laquo;</span>
 </section>
 
 <section class="slide" id="current-status-month-6">
   <hgroup>
     <h3>Current Status</h3>
-    <h4>6 months later</h4>
+    <h4>2 weeks later</h4>
   </hgroup>
-  Management: Why does this talk so long???
-  Developer: WTF?! Who did this? (Toilet penis kill me now)
-</section>
-
-<section class="slide" id="not-unique">
-  <hgroup>
-    <h3>But:</h3>
-    <h4>Your Problem is not unique</h4>
-  </hgroup>
-  cubicles (office space)
+  <strong class="delayed">Management:</strong> <span class="delayed">&raquo;Why does this take so long???&laquo;</span>
+  <br>
+  <strong class="delayed">Developers:</strong> <span class="delayed">&raquo;Because of this:&laquo;
+  <br>
+  <img src="" class="delayed"></span>
 </section>
 
 <section class="slide" id="what-you-need">
@@ -63,6 +60,14 @@
     <li class="delayed">Organize rendering of views</li>
     <li class="delayed">And please, no more jQuery callback soup</li>
   </ul>
+</section>
+
+<section class="slide" id="not-unique">
+  <hgroup>
+    <h3>But:</h3>
+    <h4>Your Problem is not unique</h4>
+  </hgroup>
+  <img src="img/cubicles.jpg">
 </section>
 
 <section class="slide" id="backbone-to-the-rescue">
@@ -85,13 +90,17 @@
 </section>
 
 <section class="slide" id="backbone">
-  <h3>Backbone.js</h3>
+  <hgroup>
+    <h3>Backbone.js</h3>
+    <h4>Overview</h4>
+  </hgroup>
   <ul>
     <li class="delayed">Provides MVC</li>
-    <li class="delayed">Easy to use with rest APIs</li>
+    <li class="delayed">Easy to use with REST APIs</li>
     <li class="delayed">Event driven</li>
     <li class="delayed">Very small (4.6kb, Packed and Gzipped)</li>
-    <li class="delayed">Hard dependencies: underscore, jquery/zepto</li>
+    <li class="delayed">Hard dependencies: underscore.js, jQuery / zepto.js</li>
+    <li class="delayed">Excellent documentation</li>
   </ul>
 </section>
 
@@ -310,6 +319,11 @@ $('.some-div').html(view.el);</span></pre>
     'button.save click': 'saveTweet'
   },</span>
 
+  initalize: function() {
+    this.model = new TweetModel();
+    this.model.bind('change', this.render);
+  },
+
   render: function() {
     $(this.el).html(
       "&lt;input type="text" name="text"&gt;" +
@@ -318,9 +332,8 @@ $('.some-div').html(view.el);</span></pre>
   },
 
   <span class="delayed">saveTweet: function(event) {
-    <span class="delayed">tweet = new TweetModel();
-    tweet.set({text: $(this.el).find('text').val()});
-    tweet.save();</span>
+    <span class="delayed">this.model.set({text: $(this.el).find('text').val()});
+    this.model.save();</span>
   }</span>
 });</pre>
 </section>
@@ -353,8 +366,8 @@ $('.some-div').html(view.el);</span></pre>
     <h4>Overview</h4>
   </hgroup>
   <ul>
-    <li class="delayed">Keeps track of URL routing</li>
-    <li class="delayed">Works with pushState</li>
+    <li class="delayed">Keeps track of URL routing<span class="delayed">, i.e. <span style="opacity: 0.6">http://sebslomski.com/</span>#!/tweets</span></li>
+    <li class="delayed">Works with pushState<span class="delayed">, i.e. <span style="opacity: 0.6">http://sebslomski.com</span>/tweets</span></li>
   </ul>
 </section>
 
@@ -366,21 +379,20 @@ $('.some-div').html(view.el);</span></pre>
   <pre class="sh_javascript_dom">MainRouter = Backbone.Router.extends({
   routes: {
     '': 'showAllTweets',
-    '/tweets': 'showAllTweets',
-    'tweet/:id': 'showTweet'
+    '!/tweets': 'showAllTweets',
+    '!/tweet/:id': 'showTweet'
   },
 
-  showAllTweets: function() {
+  <span class="delayed">showAllTweets: function() {
     ...
   },
 
   showTweet: function(id) {
     ...
-  }
+  }</span>
 });
 <span class="delayed">
 mainRouter = new MainRouter();</span></pre>
-  TODO: Picture of URL
 </section>
 
 
