@@ -58,7 +58,7 @@ div.wrapper {
 
 div.circle {
   background: red;
-  border-radius: 999px;
+  border-radius: 50%;
   float: left;
   margin: 0.1em;
   text-align: center;
@@ -78,6 +78,97 @@ div.circle {
   div.circle.r.displayed span.router {
     display: inline;
   }
+
+
+section#view-sync div.wrapper {
+  margin-top: 0.4em;
+  position: relative;
+}
+
+section#view-sync div.view {
+  position: absolute;
+  top: 0.4em;
+  left: 0;
+}
+
+section#view-sync div.model {
+  position: absolute;
+  top: 0.4em;
+  right: 0;
+}
+
+section#view-sync div.interaction {
+  width: 100%;
+  position: relative;
+  height: 2.8em;
+}
+
+section#view-sync div.click {
+  background: blue;
+  width: 3em;
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+  font-size: 30%;
+  position: absolute;
+  z-index: 10;
+  margin: 0 3em;
+}
+
+section#view-sync div.click.displayed {
+  -webkit-transition-property: left;
+  -webkit-transition-duration: 1.5s;
+  left: 60%;
+  opacity: 1;
+}
+
+section#view-sync div.set {
+  background: blue;
+  width: 3em;
+  padding-top: 0.7em;
+  padding-bottom: 0.7em;
+  font-size: 30%;
+  position: absolute;
+  z-index: 10;
+  top: 2.8em;
+  right: 5em;
+}
+section#view-sync div.set.displayed,
+section#view-sync div.render.displayed {
+  opacity: 1;
+}
+
+section#view-sync div.change {
+  background: blue;
+  width: 3.5em;
+  padding-top: 0.9em;
+  padding-bottom: 0.9em;
+  font-size: 30%;
+  position: absolute;
+  z-index: 10;
+  margin: 0 3em;
+  bottom: 0;
+  right: 0;
+}
+
+section#view-sync div.change.displayed {
+  -webkit-transition-property: right;
+  -webkit-transition-duration: 1.5s;
+  right: 60%;
+  opacity: 1;
+}
+
+
+section#view-sync div.render {
+  background: blue;
+  width: 3.5em;
+  padding-top: 0.9em;
+  padding-bottom: 0.9em;
+  font-size: 30%;
+  position: absolute;
+  z-index: 10;
+  top: 2.8em;
+  left: 5em;
+}
 
 .question {
   color: orange;

@@ -306,9 +306,9 @@ $('.some-div').html(view.el);</span></pre>
   </hgroup>
   <pre class="sh_javascript_dom">AddTweetView = Backbone.Views.extends({
   id: 'add-tweet',
-  events: {
+  <span class="delayed">events: {
     'button.save click': 'saveTweet'
-  },
+  },</span>
 
   render: function() {
     $(this.el).html(
@@ -317,12 +317,11 @@ $('.some-div').html(view.el);</span></pre>
     );
   },
 
-  saveTweet: function(event) {
-    tweet = new TweetModel({
-      text: $(this.el).find('text').val()
-    });
-    tweet.save();
-  }
+  <span class="delayed">saveTweet: function(event) {
+    <span class="delayed">tweet = new TweetModel();
+    tweet.set({text: $(this.el).find('text').val()});
+    tweet.save();</span>
+  }</span>
 });</pre>
 </section>
 
@@ -333,11 +332,17 @@ $('.some-div').html(view.el);</span></pre>
     <h4>Keeping everything in sync</h4>
   </hgroup>
   <div class="wrapper">
-    <div class="circle view">View</div>
     <div class="interaction">
-      <div></div>
+      <div class="circle click delayed">Click</div>
+      <div class="delayed"></div>
+      <div class="circle set delayed">Set</div>
+      <div class="circle change delayed">Change</div>
+      <div class="delayed"></div>
+      <div class="circle render delayed">Render</div>
     </div>
-    <div class="circle model">Model</div>
+    <div class="circle view">V
+    </div>
+    <div class="circle model">M</div>
   </div>
 </section>
 
@@ -393,10 +398,6 @@ mainRouter = new MainRouter();</span></pre>
 </section>
 
 <script src="csss/slideshow.js"></script>
-<script src="csss/plugins/css-prefix.js"></script>
-<script src="csss/plugins/css-edit.js"></script>
-<script src="csss/plugins/css-snippets.js"></script>
-<script src="csss/plugins/css-controls.js"></script>
 <script type="text/javascript" src="js/sh_main.min.js"></script>
 <script type="text/javascript" src="js/sh_javascript_dom.min.js"></script>
 <script>
@@ -404,10 +405,6 @@ var slideshow = new SlideShow();
 
 sh_highlightDocument();
 
-var cssControls = document.querySelectorAll('.css-control');
-for(var i=0; i<cssControls.length; i++) {
-  new CSSControl(cssControls[i]);
-}
 </script>
 
 </body>
