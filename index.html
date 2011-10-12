@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>CSSS: A brief introduction</title>
+  <title>Structuring front-ends with Backbone.js</title>
 
   <link href="csss/slideshow.css" rel="stylesheet" />
   <link href="css/theme.css" rel="stylesheet" />
@@ -49,7 +49,7 @@
   <br>
   <strong class="delayed">Developers:</strong> <span class="delayed">&raquo;Because of this:&laquo;
   <br>
-  <img src="" class="delayed"></span>
+  <img src="img/jquery-soup.jpg" class="delayed"></span>
 </section>
 
 <section class="slide" id="what-you-need">
@@ -113,11 +113,12 @@
   <li class="delayed">CoffeeScript</li>
   <li class="delayed">Underscore.js</li>
   <li class="delayed">Jammit</li>
-  <li class="delayed">Visual Search</li>
+  <li class="delayed">etc. ...</li>
   </ul>
 </section>
 
 <section class="slide" id="mvc">
+  <h3>Structure</h3>
   <div class="wrapper">
     <div class="circle delayed">
       M
@@ -269,7 +270,7 @@ tweets.remove(tweet);</span></pre>
   </hgroup>
   <ul>
     <li class="delayed">Responsible for DOM modifications</li>
-    <li class="delayed">Related to a DOM element and a collection or a model</li>
+    <li class="delayed">Related to a DOM element<!-- and a collection or a model--></li>
     <li class="delayed">Works in its DOM element range</li>
     <li class="delayed">Events bound to view</li>
 </ul>
@@ -281,14 +282,14 @@ tweets.remove(tweet);</span></pre>
     <h4>Defining a view</h4>
   </hgroup>
   <pre class="sh_javascript_dom">AddTweetView = Backbone.Views.extends({
-  id: 'add-tweet',
+  <span class="delayed">id: 'add-tweet',</span>
 
-  render: function() {
-    $(this.el).html(
+  <span class="delayed">render: function() {
+    var html =
       "&lt;input type="text" name="text"&gt;" +
-      "&lt;input type="button" class="save" value="save"&gt;"
-    );
-  }
+      "&lt;input type="button" class="save" value="save"&gt;";
+    <span class="delayed">$(this.el).html(html);</span>
+  }</span>
 });</pre>
 </section>
 
@@ -308,37 +309,6 @@ view.render();
 $('.some-div').html(view.el);</span></pre>
 </section>
 
-<section class="slide" id="views-events">
-  <hgroup>
-    <h3>Views</h3>
-    <h4>Adding events</h4>
-  </hgroup>
-  <pre class="sh_javascript_dom">AddTweetView = Backbone.Views.extends({
-  id: 'add-tweet',
-  <span class="delayed">events: {
-    'button.save click': 'saveTweet'
-  },</span>
-
-  initalize: function() {
-    this.model = new TweetModel();
-    this.model.bind('change', this.render);
-  },
-
-  render: function() {
-    $(this.el).html(
-      "&lt;input type="text" name="text"&gt;" +
-      "&lt;input type="button" class="save" value="save"&gt;"
-    );
-  },
-
-  <span class="delayed">saveTweet: function(event) {
-    <span class="delayed">this.model.set({text: $(this.el).find('text').val()});
-    this.model.save();</span>
-  }</span>
-});</pre>
-</section>
-
-
 <section class="slide" id="view-sync">
   <hgroup>
     <h3>Views</h3>
@@ -357,6 +327,37 @@ $('.some-div').html(view.el);</span></pre>
     </div>
     <div class="circle model">M</div>
   </div>
+</section>
+
+<section class="slide" id="views-events">
+  <hgroup>
+    <h3>Views</h3>
+    <h4>Adding events</h4>
+  </hgroup>
+  <pre class="sh_javascript_dom">AddTweetView = Backbone.Views.extends({
+  id: 'add-tweet',
+
+  <span class="delayed">initalize: function() {
+    this.model = new TweetModel();
+    this.model.bind('change', this.render);
+  },</span>
+
+  render: function() {
+    $(this.el).html(
+      '&lt;input type="text" name="text"<span class="delayed"> value="' + this.model.get('text') + '"</span>&gt;' +
+      '&lt;input type="button" class="save" value="save"&gt;'
+    );
+  },
+
+  <span class="delayed">events: {
+    'button.save click': 'saveTweet'
+  },</span>
+
+  <span class="delayed">saveTweet: function(event) {
+    <span class="delayed">this.model.set({text: $(this.el).find('text').val()});
+    this.model.save();</span>
+  }</span>
+});</pre>
 </section>
 
 
