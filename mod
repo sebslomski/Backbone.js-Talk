@@ -1,8 +1,13 @@
 - Current Status (3)
 - What you actually need
+  - Man möchte Server-Resourcen verwenden
+  - Navigation -> zb. Bookmarkbare JS-Tabs
+  - DOM rendering organisieren
+  - und bitte keine jquery callback soup mehr
+
 - But: Your problem is not unique
 - Backbone.js to the rescue
-- Backbone.js in a nutshell
+- Backbone.js zusammengefasst
   - abstrahiert Funktionalität
   - separiert die einzelnen Bereiche
   - entkoppelt den frontend code

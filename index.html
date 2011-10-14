@@ -478,10 +478,10 @@ $(document).ready(function() {
     <h4>Defining a model</h4>
   </hgroup>
   <pre class="sh_javascript_dom delayed">TweetModel = Backbone.Model.extends({
-  url: '/tweet',
-  defaults: {
+  <span class="delayed">url: '/tweet',</span>
+  <span class="delayed">defaults: {
     date: +new Date()
-  }
+  }</span>
 });
 </pre>
 </section>
@@ -522,7 +522,7 @@ tweet.fetch();</span></pre>
     <h3>Models</h3>
     <h4>Deleting a model on the server</h4>
   </hgroup>
-  <pre class="sh_javascript_dom">tweet.destroy();</pre>
+  <pre class="sh_javascript_dom delayed">tweet.destroy();</pre>
 </section>
 
 
@@ -550,8 +550,8 @@ tweet.fetch();</span></pre>
     <h4>Defining a collection</h4>
   </hgroup>
   <pre class="sh_javascript_dom delayed">TweetCollection = Backbone.Collection.extends({
-  model: TweetModel,
-  url: '/tweets'
+  <span class="delayed">model: TweetModel,</span>
+  <span class="delayed">url: '/tweets'</span>
 });
 </pre>
 </section>
